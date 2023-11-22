@@ -1,0 +1,37 @@
+services:
+  web:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    ports:
+    - "80:80"
+
+    volumes:
+    - ./www:/var/www/html
+    - ./site.conf:/etc/nginx/conf.d/default.conf
+    
+    links:
+    - php
+  php:
+    # image: php:8.2-fpm
+    build: 
+      dockerfile: ./php.dockerfile
+    container_name: php-fpm
+    volumes:   
+    # -  ./php.ini:/usr/local/etc/php/php.ini
+    - ./www:/var/www/html
+      
+  db:
+    container_name: postgres
+    image: "postgres:16"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+      PGDATA: "/data/postgres"
+    volumes:
+      - ./postgres:/data/postgres
+      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
+
