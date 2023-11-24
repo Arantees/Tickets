@@ -46,11 +46,8 @@ class Router{
 
     /**
      * Metodo responsavel por adicionar uma rota na classe
-     * @param string $method
-     * @param string $route
-     * @param array $params
      */
-    private function addRoute($method, $route, $params=[]){
+    private function addRoute(string $method ,string $route,array $params=[]){
           //Validacao dos parametros
           foreach ($params as $key=>$value){
             if($value instanceof Closure){

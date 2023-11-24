@@ -11,16 +11,16 @@ class Home extends Page
      * método responsavel por retornar para o counteudo da view da home
      * @return  string
      */
-    public static function getHome()
+    public static function getHome(): string
     {
         $obOrganization = new Organization;
 
         $content =  View::render('pages/home', [
-            'name'  => $obOrganization -> name,
-            'description'=>  $obOrganization -> description,
-            'site'=> $obOrganization -> site
+            'name'  => $obOrganization->name,
+            'description' =>  $obOrganization->description,
+            'site' => $obOrganization->site
         ]);
         //RETORNA A VIEW DA PAGINA
-        return parent::getPage('Teste-Tickets', $content) ;
+        return parent::getPage('Teste-Tickets', $content);
     }
 }

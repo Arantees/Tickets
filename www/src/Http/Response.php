@@ -31,11 +31,8 @@ class Response
 
     /**
      * Metodo responsavel por iniciar a classe e definir os valores
-     * @param integer $httpCode
-     * @param mixed $content
-     * @param string $contentType
      */
-    public function __construct($httpCode, $content, $contentType = 'text/html')
+    public function __construct(int $httpCode, mixed $content, string $contentType = 'text/html')
     {
         $this->httpCode = $httpCode;
         $this->content = $content;
@@ -43,19 +40,16 @@ class Response
     }
     /**
      * Metodo responsavel por alterar o content type do response
-     * @param string $contentType
      */
-    public function setContentType($contentType)
+    public function setContentType(string $contentType)
     {
         $this->contentType = $contentType;
         $this->addHeader('Content-Type', $contentType);
     }
     /**
      * Metodo responsavel por adicionar um registro no cabeçalho do response
-     * @param string $key
-     * @param string $value
      */
-    public function addHeader($key, $value)
+    public function addHeader(string $key, string $value)
     {
         $this->headers[$key] = $value;
     }
