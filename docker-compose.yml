@@ -21,7 +21,7 @@ services:
     # -  ./php.ini:/usr/local/etc/php/php.ini
     - ./www:/var/www/html
       
-  db:
+  db:  
     container_name: postgres
     image: "postgres:16"
     environment:
