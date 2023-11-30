@@ -1,7 +1,7 @@
 <?php 
 
 namespace Tickets\Utils;
-class FuncoesUtils{
+class FunctionsUtils{
 
    public static function print_pre($variavel) {
         echo '<pre>';

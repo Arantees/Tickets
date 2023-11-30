@@ -1,19 +1,24 @@
 <?php
 
 require_once 'vendor/autoload.php';
-use Tickets\Controller\Pages\Home;
-use Tickets\Http\Response;
+
 use Tickets\Http\Router;
-use Tickets\Utils\FuncoesUtils;
+use Tickets\Utils\View;
 
-define('URL', 'http://localhost/tickets');
-$obRouter= new Router(URL);
-FuncoesUtils::print_pre($obRouter);
+define('URL','http://localhost/tickets');
 
-//ROTA HOME
-$obRouter->get('/',[
-    function(){
-        return new Response(200,Home::getHome());
-    }
+//Define valor padrao das variaveis
+View::init([
+    'URL' => URL
 ]);
 
+//Inicia o router
+$obRouter = new Router(URL);
+//FunctionsUtils::print_pre($obRouter);
+
+//Inclui as rotas de paginas
+include __DIR__.'/Router/pages.php';
+
+// imprime o response da rota
+$obRouter->run()
+    ->sendResponse();
