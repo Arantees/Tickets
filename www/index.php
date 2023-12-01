@@ -3,8 +3,13 @@
 require_once 'vendor/autoload.php';
 
 use Tickets\Http\Router;
+use Tickets\Utils\FunctionsUtils;
 use Tickets\Utils\View;
+use WilliamCosta\DotEnv\Environment;
 
+Environment::load(__DIR__);
+
+FunctionsUtils::print_pre(getenv('URL')); exit;
 define('URL','http://localhost/tickets');
 
 //Define valor padrao das variaveis
