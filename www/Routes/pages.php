@@ -2,6 +2,7 @@
 use Tickets\Http\Response;
 use \Tickets\Controller\Pages;
 
+
 //ROTA HOME
 $obRouter->get('/', [
     function (){
@@ -14,9 +15,16 @@ $obRouter->get('/sobre', [
         return new Response(200, Pages\About::getAbout());
     }
 ]);
-//ROTA Dinamica
-$obRouter->get('/pagina/{idPagina}/{acao}', [
-    function ($idPagina,$acao){
-        return new Response(200, 'pagina - ' . $idPagina . ' - ' . $acao);
+
+//ROTA Depoimentos
+$obRouter->get('/depoimentos', [
+    function (){
+        return new Response(200, Pages\Testimony::getTestimonies());
+    }
+]);
+//ROTA Depoimentos (Insert)
+$obRouter->post('/depoimentos', [
+    function ($request){
+        return new Response(200, Pages\Testimony::getTestimonies());
     }
 ]);
