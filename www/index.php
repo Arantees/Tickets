@@ -13,5 +13,5 @@ $obRouter = new Router(URL);
 include __DIR__.'/Routes/pages.php';
 
 // imprime o response da rota
-$obRouter->run()
-    ->sendResponse();
+$retorno = $obRouter->run();
+$retorno->sendResponse();

@@ -25,6 +25,12 @@ $obRouter->get('/depoimentos', [
 //ROTA Depoimentos (Insert)
 $obRouter->post('/depoimentos', [
     function ($request){
-        return new Response(200, Pages\Testimony::getTestimonies());
+        return new Response(200, Pages\Testimony::insertTestimony($request));
     }
 ]);
+
+//ROTA Cleber
+$obRouter->get(
+    '/cleber',
+    [function (){echo "Bem vindo Cleber";}]
+);

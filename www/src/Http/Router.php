@@ -82,7 +82,7 @@ class Router
 
         //Adiciona a rota dentro da classe
         $this->routes[$patternRoute][$method] = $params;
-        // FunctionsUtils::print_pre($this);
+        // FunctionsUtils::print_pre($this->routes['/^\/cleber$/']['GET']['Controller']);
     }
 
 
@@ -142,8 +142,11 @@ class Router
 
         //Validacao das Rotas
         foreach ($this->routes as $patternRoute => $methods) {
+            //FunctionsUtils::print_pre($this->routes);
             //Verifica se a URI bate com o padrao
             if (preg_match($patternRoute, $uri, $matches)) {
+                //FunctionsUtils::print_pre($methods[$httpMethod]);
+
                 //Verifica o metodo
                 if (isset($methods[$httpMethod])) {
                     //Remove a primeira posicao

@@ -5,7 +5,6 @@
         }
     },
     "require": {
-        "william-costa/dot-env": "^0.1.0",
-        "william-costa/database-manager": "^0.1.0"
+        "william-costa/dot-env": "^0.1.0"
     }
 }
