@@ -31,7 +31,7 @@ class Testimony
         //Define a data
         $this->data = date('Y-m-d H:i:s');
 
-        $this->id = (new Database('depoimentos'))->insert(
+        $this->id = (new Database('depoiments'))->insert(
             [
                 'nome' => $this->nome,
                 'mensagem' => $this->mensagem,
@@ -46,7 +46,7 @@ class Testimony
      * @param string $order
      * @param string $limit
      * @param string $field
-     * @return PDOStatement
+     * @return \PDOStatement
      */
     public static function getTestimonies( $where='', $order = '', $limit = '', $field = '*'){
         return (new Database('depoiments')) -> select ($where,$order,$limit, $field);

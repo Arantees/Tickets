@@ -1,30 +1,31 @@
 <?php
+
 use Tickets\Http\Response;
 use \Tickets\Controller\Pages;
 
 
 //ROTA HOME
 $obRouter->get('/', [
-    function (){
+    function () {
         return new Response(200, Pages\Home::getHome());
     }
 ]);
 //ROTA Sobre
 $obRouter->get('/sobre', [
-    function (){
+    function () {
         return new Response(200, Pages\About::getAbout());
     }
 ]);
 
 //ROTA Depoimentos
 $obRouter->get('/depoimentos', [
-    function (){
-        return new Response(200, Pages\Testimony::getTestimonies());
+    function ($request) {
+        return new Response(200, Pages\Testimony::getTestimonies($request));
     }
 ]);
 //ROTA Depoimentos (Insert)
 $obRouter->post('/depoimentos', [
-    function ($request){
+    function ($request) {
         return new Response(200, Pages\Testimony::insertTestimony($request));
     }
 ]);
@@ -32,5 +33,7 @@ $obRouter->post('/depoimentos', [
 //ROTA Cleber
 $obRouter->get(
     '/cleber',
-    [function (){echo "Bem vindo Cleber";}]
+    [function () {
+        echo "Bem vindo Cleber";
+    }]
 );

@@ -4,10 +4,13 @@ namespace Tickets\Http;
 
 class Request
 {
+    //Instancia do router
+    private $router;
     /**
      * Método HTTP da requisiçao
      */
     private $httpMethod;
+   
     /**
      * Uri da pagina
      */
@@ -27,13 +30,23 @@ class Request
      */
     private $headers = [];
 
-    public function __construct()
+    public function __construct($router)
     {
+        $this->router = $router;
         $this->queryParams = $_GET ?? [];
         $this->postVars = $_POST ?? [];
         $this->headers = getallheaders();
         $this->httpMethod = $_SERVER['REQUEST_METHOD'] ?? '';
+        $this->setUri();
+    }
+    //Metodo responsavel por definir a URI
+    private function setUri(){
+        //URI completa (com gets)
         $this->uri = $_SERVER['REQUEST_URI'] ?? '';
+
+        //Remove GETS da URI
+        $xURI = explode('?', $this->uri);
+        $this->uri = $xURI[0];
     }
 
     /**
@@ -51,6 +64,14 @@ class Request
     public function getUri()
     {
         return $this->uri;
+    }
+    /**
+     * Metodo responsavel por retornar a instancia de router
+     * @return Router
+     */
+    public function getRouter()
+    {
+        return $this->router;
     }
 
     /**
