@@ -3,7 +3,6 @@
 use Tickets\Http\Response;
 use \Tickets\Controller\Pages;
 
-
 //ROTA HOME
 $obRouter->get('/', [
     function () {

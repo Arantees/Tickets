@@ -5,8 +5,8 @@ namespace Tickets\Http;
 use \Closure;
 use \Exception;
 use \ReflectionFunction;
-use Tickets\Utils\FunctionsUtils;
-use Tickets\Http\Middleware\Queue as MiddlewareQueue;
+    use Tickets\Utils\FunctionsUtils;
+    use Tickets\Http\Middleware\Queue as MiddlewareQueue;
 
 class Router
 {
@@ -59,13 +59,13 @@ class Router
         //Validacao dos parametros
         foreach ($params as $key => $value) {
             if ($value instanceof Closure) {
-                $params['Controller'] = $value;
+                $params['controller'] = $value;
                 unset($params[$key]);
                 continue;
             }
         }
         //Middlewares da rota
-        $params['middleware'] = $params['middlewares'] ?? [];
+        $params['middlewares'] = $params['middlewares'] ?? [];
 
         //Variaveis da Rota
         $params['variables'] = [];
@@ -177,27 +177,27 @@ class Router
     {
         try {
             //Obtem a rota atual
-            $route = $this->getRoute();
-
+            $route = $this->getRoute();            
             //Verifica o controlador
-            if (!isset($route['Controller'])) {
+            if (!isset($route['controller'])) {
+                //FunctionsUtils::print_pre($route);
                 throw new Exception("A URL nao pôde ser processada", 500);
             }
+            
             // Argumentos da funçao 
             $args = [];
 
             //Reflection
-            $reflection = new ReflectionFunction($route['Controller']);
+            $reflection = new ReflectionFunction(($route['controller']));;
             foreach ($reflection->getParameters() as $parameter) {
                 $name = $parameter->getName();
                 $args[$name] = $route['variables'][$name] ?? '';
             }
 
-         //Retorna a execuçao da fila de middlewares
-        return (new MiddlewareQueue($route['middlewares'],$route['controller'],$args))->next($this->request);
+            //Retorna a execuçao da fila de middlewares
+            
+            return (new MiddlewareQueue($route['middlewares'], $route['controller'], $args))->next($this->request);
         
-            // FunctionsUtils::print_pre($route);
-
         } catch (Exception $e) {
             return new Response($e->getCode(), $e->getMessage());
         }
